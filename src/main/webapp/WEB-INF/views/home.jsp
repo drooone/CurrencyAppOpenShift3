@@ -92,7 +92,7 @@
 				<td><%=obj[6]%></td>
 				<td><%=obj[3]%></td>
 				<%-- <td><a href="/CurrencyAppOpenShift2/currency/?code=<%=obj[2]%>"><%=obj[2]%></a></td>  --%>
-				<td><a href="/currency?code=<%=obj[2]%>"><%=obj[2]%></a></td>
+				<td><a href="currency?code=<%=obj[2]%>"><%=obj[2]%></a></td>
 			</tr>
 			<%
 				}
