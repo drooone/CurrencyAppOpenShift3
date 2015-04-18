@@ -2,7 +2,7 @@ package apps.programing.eu.dao;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -10,7 +10,7 @@ import apps.programing.eu.model.Currency;
 
 public class CurrencyDAOImpl implements CurrencyDAO {
 
-	private Logger logger = Logger.getLogger(getClass());
+
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sf) {
