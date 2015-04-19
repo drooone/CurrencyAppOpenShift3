@@ -23,23 +23,23 @@
 	
 	<context:component-scan base-package="apps.programing.eu" />
 	
-	<!-- <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
 			value="jdbc:mysql://s38.hekko.net.pl:3306/drooone_Currency" />
 		<beans:property name="username" value="drooone_root" />
 		<beans:property name="password" value="root" />
-	</beans:bean> -->
+	</beans:bean>
 	
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+<!-- 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
 			value="jdbc:mysql://127.8.141.2:3306/currencyappopenshift3" />
 		<beans:property name="username" value="adminCZIWLDg" />
 		<beans:property name="password" value="UmaahXlqw9pY" />
-	</beans:bean>
+	</beans:bean> -->
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
 	<beans:bean id="hibernate4AnnotatedSessionFactory"
