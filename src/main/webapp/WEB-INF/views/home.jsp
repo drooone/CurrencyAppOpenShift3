@@ -51,8 +51,8 @@
 <body>
 
 	<br>
-	<h1>Hello world!1.4</h1>
-	<P>The time on the server is ${serverTime}.</P>
+	<h1>Currency project</h1>
+	<p class="tg">The time on the server is ${serverTime}.</p>
 	<p>
 		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze
 		strony NBP <a
@@ -62,7 +62,7 @@
 		<li>
 		<li>
 	</ul>
-	</p>
+	
 	<h2 align="CENTER">Currency List</h2>
 
 	<c:if test="${!empty listCurrency}">
@@ -82,7 +82,7 @@
 					while (itr.hasNext()) {
 
 						Object[] obj = (Object[]) itr.next();
-						Currency curr = Currency.getInstance((String) obj[2]);
+						/* Currency curr = Currency.getInstance((String) obj[2]); */
 			%>
 			<tr>
 				<td><%=obj[0]%></td>
@@ -91,7 +91,6 @@
 				<td><%=obj[5]%></td>
 				<td><%=obj[6]%></td>
 				<td><%=obj[3]%></td>
-				<%-- <td><a href="/CurrencyAppOpenShift2/currency/?code=<%=obj[2]%>"><%=obj[2]%></a></td>  --%>
 				<td><a href="currency?code=<%=obj[2]%>"><%=obj[2]%></a></td>
 			</tr>
 			<%

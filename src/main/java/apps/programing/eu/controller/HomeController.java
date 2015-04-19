@@ -71,7 +71,7 @@ public class HomeController {
 
 		Line line = Plots.newLine(
 				DataUtil.scaleWithinRange(0, 10, currencyExchangeRateList),
-				Color.newColor("CA3D05"), "My Website");
+				Color.newColor("CA3D05"), "Chart " + code);
 		line.setLineStyle(LineStyle.MEDIUM_LINE);
 
 		LineChart chart = GCharts.newLineChart(line);
