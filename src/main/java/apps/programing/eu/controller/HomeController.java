@@ -65,7 +65,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/currency", method = RequestMethod.GET)
 	public String drawPieChart(@RequestParam String code, Model model) {
-		System.out.println("CODE:");
 		List currencyExchangeRateList = this.currencyService
 				.listCurrencyAverageValues(code);
 
@@ -90,6 +89,17 @@ public class HomeController {
 		model.addAttribute("chartUrl", chart.toURLString());
 
 		return "currency";
+	}
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public String listCurrency(Locale locale, Model model) {
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		return "test";
 	}
 	
 }
