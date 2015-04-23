@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import apps.programing.eu.dao.CurrencyDAO;
+import apps.programing.eu.model.Currency;
 
 @Service
 public class CurrencyServiceImpl implements CurrencyService {
@@ -25,9 +26,9 @@ public class CurrencyServiceImpl implements CurrencyService {
 
 	@Override
 	@Transactional
-	public List<Object> listCurrencyAverageValues(String code) {
+	public List<Currency> listCurrencyAverageValues(String code, String dateFrom, String dateTo) {
 		
-		return this.currencyDAO.listCurrencyAverageValues(code);
+		return this.currencyDAO.listCurrencyAverageValues(code, dateFrom, dateTo);
 	}
 
 }

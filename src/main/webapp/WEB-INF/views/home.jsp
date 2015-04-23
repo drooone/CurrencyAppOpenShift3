@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <%@ page language="java" import="java.util.*,java.lang.*"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page session="false"%>
@@ -54,15 +55,13 @@
 	<h1>Currency project</h1>
 	<p class="tg">The time on the server is ${serverTime}.</p>
 	<p>
-		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze
-		strony NBP <a
-			href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a>
-		<br> <strong>Zaaaaa </strong>
+		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze strony NBP <a
+			href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a> <br> <strong>Zaaaaa </strong>
 	<ul>
 		<li>
 		<li>
 	</ul>
-	
+
 	<h2 align="CENTER">Currency List</h2>
 
 	<c:if test="${!empty listCurrency}">
@@ -91,7 +90,7 @@
 				<td><%=obj[5]%></td>
 				<td><%=obj[6]%></td>
 				<td><%=obj[3]%></td>
-				<td><a href="currency?code=<%=obj[2]%>"><%=obj[2]%></a></td>
+				<td><a href="currency?currencyCode=<%=obj[2]%>&dateFrom=02/24/2007&dateTo=01/04/2015"><%=obj[2]%></a></td>
 			</tr>
 			<%
 				}

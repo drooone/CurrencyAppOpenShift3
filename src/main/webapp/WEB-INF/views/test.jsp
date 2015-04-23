@@ -13,5 +13,14 @@
 <body>
 <h1>Test Page</h1>
 	<p >The time on the server is ${serverTime}.</p>
+	
+	<form:form method="post" action="test" >
+       
+        <!--Notice, this is normal html tag, will not be bound to an object -->
+       <input name="currencyCode" type="text"/>
+   
+            <input type="submit" value="send"/>
+   
+</form:form>
 </body>
 </html>

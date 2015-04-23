@@ -1,9 +1,14 @@
 package apps.programing.eu.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +31,7 @@ import com.googlecode.charts4j.LineStyle;
 import com.googlecode.charts4j.Plots;
 
 import apps.programing.eu.service.CurrencyService;
+import apps.programing.eu.util.Chart;
 import apps.programing.eu.model.Currency;
 
 /**
@@ -33,7 +39,7 @@ import apps.programing.eu.model.Currency;
  */
 @Controller
 public class HomeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private CurrencyService currencyService;
 
@@ -42,64 +48,87 @@ public class HomeController {
 	public void setCurrencyService(CurrencyService cs) {
 		this.currencyService = cs;
 	}
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+
 		model.addAttribute("currency", new Currency());
 		model.addAttribute("listCurrency", this.currencyService.listCurrency());
-		
+
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+
 		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+
+		model.addAttribute("serverTime", formattedDate);
+
 		return "home";
 	}
-	
+
+	/**
+	 * Return currency with chart page
+	 * 
+	 * @param currencyCode
+	 *            - currency code
+	 * @param dateFrom
+	 *            - date from range
+	 * @param dateTo
+	 *            - date to range
+	 * @param model
+	 *            - model
+	 * @return - currency.jsp page
+	 */
 	@RequestMapping(value = "/currency", method = RequestMethod.GET)
-	public String drawPieChart(@RequestParam String code, Model model) {
-		List currencyExchangeRateList = this.currencyService
-				.listCurrencyAverageValues(code);
+	public String drawPieChart(@RequestParam String currencyCode, @RequestParam String dateFrom, @RequestParam String dateTo, Model model) {
 
-		Line line = Plots.newLine(
-				DataUtil.scaleWithinRange(0, 10, currencyExchangeRateList),
-				Color.newColor("CA3D05"), "Chart " + code);
-		line.setLineStyle(LineStyle.MEDIUM_LINE);
+		System.out.println("DATe from:" + dateFrom + " dateTo:" + dateTo);
+		List<Double> averageValuesList = new LinkedList<Double>();
+		List<Currency> currencyExchangeRateList = this.currencyService.listCurrencyAverageValues(currencyCode, dateFrom, dateTo);
+		for (Iterator<Currency> iterator = currencyExchangeRateList.iterator(); iterator.hasNext();) {
+			Currency cur = (Currency) iterator.next();
+			averageValuesList.add(cur.getAverageExchangeRate());
 
-		LineChart chart = GCharts.newLineChart(line);
+		}
 
-		chart.setGrid(12, 10, 3, 2);
-		chart.setSize(600, 500);
-		chart.setTitle("Currency chart", Color.CORAL, 14);
-
-		AxisLabels xAxis = AxisLabelsFactory.newAxisLabels("2007", "2008",
-				"2009", "2010", "2011", "2012", "2013", "2014", "2015");
-		AxisLabels yAxis = AxisLabelsFactory.newAxisLabels("", "1", "2", "3",
-				"4", "5", "6", "7", "8", "9", "10");
-
-		chart.addXAxisLabels(xAxis);
-		chart.addYAxisLabels(yAxis);
-		model.addAttribute("chartUrl", chart.toURLString());
+		Chart chart = new Chart(averageValuesList, currencyCode, dateFrom, dateTo);
+		model.addAttribute("currencyCode", currencyCode);
+		model.addAttribute("chartUrl", chart.createLineChart());
 
 		return "currency";
 	}
-	
-	@RequestMapping(value = "test", method = RequestMethod.GET)
-	public String listCurrency(Locale locale, Model model) {
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		return "test";
+
+	@RequestMapping(value = "/currency2", method = RequestMethod.POST)
+	public String drawChartWithDates(Model model, @RequestParam String currencyCode, @RequestParam String dateFrom, @RequestParam String dateTo) {
+
+		List<Double> averageValuesList = new LinkedList<Double>();
+		List<Currency> currencyExchangeRateList = this.currencyService.listCurrencyAverageValues(currencyCode, dateFrom, dateTo);
+		for (Iterator<Currency> iterator = currencyExchangeRateList.iterator(); iterator.hasNext();) {
+			Currency cur = (Currency) iterator.next();
+			averageValuesList.add(cur.getAverageExchangeRate());
+
+		}
+
+		Chart chart = new Chart(averageValuesList, currencyCode, dateFrom, dateTo);
+		model.addAttribute("currencyCode", currencyCode);
+		model.addAttribute("chartUrl", chart.createLineChart());
+
+		return "currency";
 	}
-	
+
+	/*
+	 * @RequestMapping(value = "test") public String listCurrency(Locale locale,
+	 * Model model, HttpServletRequest request) {
+	 * 
+	 * Date date = new Date(); DateFormat dateFormat =
+	 * DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+	 * 
+	 * String formattedDate = dateFormat.format(date);
+	 * 
+	 * model.addAttribute("serverTime", formattedDate); return "test"; }
+	 */
+
 }

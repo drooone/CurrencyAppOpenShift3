@@ -1,7 +1,9 @@
 package apps.programing.eu.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +11,6 @@ import org.hibernate.SessionFactory;
 import apps.programing.eu.model.Currency;
 
 public class CurrencyDAOImpl implements CurrencyDAO {
-
 
 	private SessionFactory sessionFactory;
 
@@ -21,12 +22,10 @@ public class CurrencyDAOImpl implements CurrencyDAO {
 	public List<Object> listCurrency() {
 		Session session = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Object> currencyList = session
-				.createQuery(
-						"SELECT idCurrency,publicationDate,currencyCode,currencyFullName, MAX(averageExchangeRate) AS maxValue,"
-								+ " MIN(averageExchangeRate) AS minValue, AVG(averageExchangeRate) AS avgValue "
-								+ "FROM Currency GROUP BY currencyCode ORDER BY currencyFullName ASC")
-				.list();
+		List<Object> currencyList = session.createQuery(
+				"SELECT idCurrency,publicationDate,currencyCode,currencyFullName, MAX(averageExchangeRate) AS maxValue,"
+						+ " MIN(averageExchangeRate) AS minValue, AVG(averageExchangeRate) AS avgValue "
+						+ "FROM Currency GROUP BY currencyCode ORDER BY currencyFullName ASC").list();
 		/*
 		 * Iterator itr = currencyList.iterator(); while (itr.hasNext()) {
 		 * 
@@ -43,12 +42,21 @@ public class CurrencyDAOImpl implements CurrencyDAO {
 	}
 
 	@Override
-	public List<Object> listCurrencyAverageValues(String code) {
+	public List<Currency> listCurrencyAverageValues(String code, String dateFrom, String dateTo) {
 		Session session = this.sessionFactory.getCurrentSession();
 		System.out.println("SIZE:");
+		SimpleDateFormat myDate = new SimpleDateFormat("mm/dd/yyyy");
+		Date dateF = null;
+		try {
+			dateF = myDate.parse(dateFrom);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		@SuppressWarnings("unchecked")
-		List<Object> currencyList = session.createQuery("Select averageExchangeRate FROM Currency WHERE currencyCode=:code").setString("code", code)
-				.list();
+		List<Currency> currencyList = session.createQuery("FROM Currency WHERE (currencyCode=:code)AND(publicationDate>:dateFrom)")
+				.setString("code", code).setDate("dateFrom", dateF).list();
 		System.out.println("SIZE:" + currencyList.size());
 		return currencyList;
 	}
