@@ -92,11 +92,13 @@
 				<td><%=obj[3]%></td>
 				<td><a href="currency?currencyCode=<%=obj[2]%>&dateFrom=02/24/2007&dateTo=01/04/2015"><%=obj[2]%></a></td>
 			</tr>
+			
 			<%
 				}
 			%>
 
 		</table>
+		<a href="test">Link</a>
 	</c:if>
 </body>
 </html>

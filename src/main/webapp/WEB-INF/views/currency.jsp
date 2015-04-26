@@ -74,19 +74,20 @@ select {
 
 </head>
 <body>
+	
 	<c:set var="path" value="${currencyCode}" />
 	<%-- 	<a href="currency?currencyCode=${path}&dateFrom=01/01/2009&dateTo=01/04/2015">link</a> --%>
 	<img alt="Chart" src=${chartUrl } />
 
 	<form:form method="post" action="currency2">
 		<p>
-			&nbsp; &nbsp; Code: <input name="currencyCode" value="${currencyCode}"> Date from: <input name="dateFrom" id="dateFrom"> &nbsp;
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date to: <input name="dateTo" id="dateTo">
+			&nbsp; &nbsp; Code: <input name="currencyCode" value="${currencyCode}"> Date from: <input name="dateFrom" id="dateFrom" value="${dateFrom}"> &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date to: <input name="dateTo" id="dateTo" value="${dateTo}">
 		</p>
 		<div>
 			<input type="submit" value="Refresh chart" class="button">
 		</div>
 	</form:form>
-
+<a href="test">Link to D3 chart</a>
 </body>
 </html>

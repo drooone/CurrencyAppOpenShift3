@@ -115,20 +115,28 @@ public class HomeController {
 		Chart chart = new Chart(averageValuesList, currencyCode, dateFrom, dateTo);
 		model.addAttribute("currencyCode", currencyCode);
 		model.addAttribute("chartUrl", chart.createLineChart());
+		model.addAttribute("dateFrom", dateFrom);
+		model.addAttribute("dateTo", dateTo);
 
 		return "currency";
 	}
 
-	/*
-	 * @RequestMapping(value = "test") public String listCurrency(Locale locale,
-	 * Model model, HttpServletRequest request) {
-	 * 
-	 * Date date = new Date(); DateFormat dateFormat =
-	 * DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-	 * 
-	 * String formattedDate = dateFormat.format(date);
-	 * 
-	 * model.addAttribute("serverTime", formattedDate); return "test"; }
-	 */
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public String listCurrency(Locale locale, Model model) {
+		
+		String listOfAverageValues = "";
+		List<Currency> currencyExchangeRateList = this.currencyService.listCurrencyAverageValues("AUD", "02/24/2007", "01/04/2015");
+		for (Iterator<Currency> iterator = currencyExchangeRateList.iterator(); iterator.hasNext();) {
+			Currency cur = (Currency) iterator.next();
+			listOfAverageValues = listOfAverageValues + String.valueOf(cur.getAverageExchangeRate()) + ",";
+		}
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate);
+		model.addAttribute("averageValuesList", listOfAverageValues);
+		return "test";
+	}
 
 }
