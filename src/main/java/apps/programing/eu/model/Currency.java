@@ -27,7 +27,7 @@ public class Currency {
 		return currencyFullName;
 	}
 
-	public void setCurrencyFullName(String currencyFullName) {
+	public void setCurrencyFullName(final String currencyFullName) {
 		this.currencyFullName = currencyFullName;
 	}
 
@@ -35,7 +35,7 @@ public class Currency {
 		return idCurrency;
 	}
 
-	public void setIdCurrency(Long idCurrency) {
+	public void setIdCurrency(final Long idCurrency) {
 		this.idCurrency = idCurrency;
 	}
 
@@ -43,7 +43,7 @@ public class Currency {
 		return publicationDate;
 	}
 
-	public void setPublicationDate(Date publicationDate) {
+	public void setPublicationDate(final Date publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 
@@ -51,7 +51,7 @@ public class Currency {
 		return currencyCode;
 	}
 
-	public void setCurrencyCode(String currencyCode) {
+	public void setCurrencyCode(final String currencyCode) {
 		this.currencyCode = currencyCode;
 	}
 
@@ -59,7 +59,7 @@ public class Currency {
 		return averageExchangeRate;
 	}
 
-	public void setAverageExchangeRate(Double averageExchangeRate) {
+	public void setAverageExchangeRate(final Double averageExchangeRate) {
 		this.averageExchangeRate = averageExchangeRate;
 	}
 

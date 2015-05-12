@@ -31,18 +31,18 @@ public class Chart {
 
 	public String createLineChart() {
 
-		Line line = Plots.newLine(DataUtil.scaleWithinRange(0, 10, chartData), Color.newColor("CA3D05"), "Chart " + currencyCode);
+		final Line line = Plots.newLine(DataUtil.scaleWithinRange(0, 10, chartData), Color.newColor("CA3D05"), "Chart " + currencyCode);
 		line.setLineStyle(LineStyle.MEDIUM_LINE);
-		List<Integer> xAxisX = axisXelements();
-		LineChart chart = GCharts.newLineChart(line);
+		final List<Integer> xAxisX = axisXelements();
+		final LineChart chart = GCharts.newLineChart(line);
 
 		chart.setGrid(12, 10, 3, 2);
 		chart.setSize(600, 500);
 		chart.setTitle("Currency chart", Color.CORAL, 14);
 
-		AxisLabels xAxis = AxisLabelsFactory.newNumericAxisLabels(xAxisX);
+		final AxisLabels xAxis = AxisLabelsFactory.newNumericAxisLabels(xAxisX);
 																		
-		AxisLabels yAxis = AxisLabelsFactory.newAxisLabels("", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+		final AxisLabels yAxis = AxisLabelsFactory.newAxisLabels("", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
 		chart.addXAxisLabels(xAxis);
 		chart.addYAxisLabels(yAxis);
@@ -51,7 +51,7 @@ public class Chart {
 	}
 
 	private List<Integer> axisXelements() {
-		List<Integer> xAxisX = new LinkedList<Integer>();
+		final List<Integer> xAxisX = new LinkedList<Integer>();
 		if (Integer.parseInt(subStringYear(dateTo)) > Integer.parseInt(subStringYear(dateFrom))) {
 			for (int i = Integer.parseInt(subStringYear(dateFrom)); i <= Integer.parseInt(subStringYear(dateTo)); i++) {
 
@@ -62,7 +62,7 @@ public class Chart {
 		return xAxisX;
 	}
 
-	public String subStringYear(String date) {
+	public String subStringYear(final String date) {
 
 		return date.substring(6);
 	}

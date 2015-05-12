@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html lang="us">
 <head>
 <meta charset="utf-8">
@@ -81,8 +83,10 @@ select {
 
 	<form:form method="post" action="currency2">
 		<p>
-			&nbsp; &nbsp; Code: <input name="currencyCode" value="${currencyCode}"> Date from: <input name="dateFrom" id="dateFrom" value="${dateFrom}"> &nbsp;
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date to: <input name="dateTo" id="dateTo" value="${dateTo}">
+			&nbsp; &nbsp; Code: <input name="currencyCode" value="${currencyCode}"> Date from: 
+			<input name="dateFrom" id="dateFrom" value="${dateFrom}"/> &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date to: 
+			<input name="dateTo" id="dateTo" value="${dateTo}"/>
 		</p>
 		<div>
 			<input type="submit" value="Refresh chart" class="button">

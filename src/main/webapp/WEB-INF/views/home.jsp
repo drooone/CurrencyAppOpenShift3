@@ -1,13 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<%@ page language="java" import="java.util.*,java.lang.*"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="java.util.*,java.lang.*"%>
 <%@ page session="false"%>
-<html>
+<html lang="us">
 
 <head>
+<meta charset="utf-8">
 <title>Currency Page</title>
 <style type="text/css">
 .tg {
@@ -90,7 +92,7 @@
 				<td><%=obj[5]%></td>
 				<td><%=obj[6]%></td>
 				<td><%=obj[3]%></td>
-				<td><a href="currency?currencyCode=<%=obj[2]%>&dateFrom=02/24/2007&dateTo=01/04/2015"><%=obj[2]%></a></td>
+				<td><a href="currency?currencyCode=<%=obj[2]%>"><%=obj[2]%></a></td>
 			</tr>
 			
 			<%

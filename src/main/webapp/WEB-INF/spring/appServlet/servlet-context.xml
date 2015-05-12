@@ -7,38 +7,36 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<context:component-scan base-package="apps.programing.eu" />
-	
-<!-- 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<beans:property name="url"
-			value="jdbc:mysql://s38.hekko.net.pl:3306/drooone_Currency" />
-		<beans:property name="username" value="drooone_root" />
-		<beans:property name="password" value="root" />
-	</beans:bean> -->
-	
+	<!-- Hekko DB connection config info -->
+	<!-- <context:property-placeholder location="classpath:systemHekko.properties" /> -->
+	<!-- OpenShift DB connection config info -->
+	<context:property-placeholder location="classpath:systemOpenShift.properties" />
+
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<beans:property name="url"
-			value="jdbc:mysql://127.8.141.2:3306/currencyappopenshift3" />
-		<beans:property name="username" value="adminCZIWLDg" />
-		<beans:property name="password" value="UmaahXlqw9pY" />
+		<beans:property name="driverClassName" value="${jdbc.driver}" />
+		<beans:property name="url" value="${jdbc.url}" />
+		<beans:property name="username" value="${jdbc.username}" />
+		<beans:property name="password" value="${jdbc.password}" />
 	</beans:bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
@@ -59,14 +57,13 @@
 		</beans:property>
 	</beans:bean>
 
-	<beans:bean id="currencyDAO"
-		class="apps.programing.eu.dao.CurrencyDAOImpl">
+	<beans:bean id="currencyDAO" class="apps.programing.eu.dao.CurrencyDAOImpl">
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
 	<beans:bean id="currencyService"
 		class="apps.programing.eu.service.CurrencyServiceImpl">
-		<beans:property name="currencyDAO" ref="currencyDAO"></beans:property>
+		<beans:property name="currencyDAO" ref="currencyDAO" />
 	</beans:bean>
 
 
@@ -77,6 +74,6 @@
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
-	
-	
+
+
 </beans:beans>

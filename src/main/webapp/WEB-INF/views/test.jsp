@@ -1,109 +1,87 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page language="java" import="java.util.*,java.lang.*"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page session="false"%>
-<html>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
 
-<head>
-<title>Currency Page</title>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<style type="text/css">
-path {
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
+body {
+  font: 10px sans-serif;
 }
- 
-line {
-    stroke: black;
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
- 
-text {
-    font-family: Arial;
-    font-size: 9pt;
+
+.area {
+  fill: steelblue;
 }
+
 </style>
-</head>
 <body>
 
-<%-- <c:if test="${not empty currencyData}">
+<script src="http://d3js.org/d3.v3.js"></script>
+<script>
 
-<ul>
-	<c:forEach var="listValue" items="${currencyData}">
-		${listValue},
-	</c:forEach>
-</ul>
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
-</c:if> --%>
+var parseDate = d3.time.format("%d-%b-%y").parse;
 
-<script type="text/javascript">
-var data = [<c:out value='${averageValuesList}'/>],
-w = 600,
-h = 400,
-margin = 20,
+var x = d3.time.scale()
+    .range([0, width]);
 
-y = d3.scale.linear().domain([0, d3.max(data)]).range([0 + margin, h - margin]),
-x = d3.scale.linear().domain([0, data.length]).range([0 + margin, w - margin])
-var vis = d3.select("body")
-    .append("svg:svg")
-    .attr("width", w)
-    .attr("height", h)
- 
-var g = vis.append("svg:g")
-    .attr("transform", "translate(0, 400)");
-var line = d3.svg.line()
-.x(function(d,i) { return x(i); })
-.y(function(d) { return -1 * y(d); })
-g.append("svg:path").attr("d", line(data));
-g.append("svg:line")
-.attr("x1", x(0))
-.attr("y1", -1 * y(0))
-.attr("x2", x(w))
-.attr("y2", -1 * y(0))
+var y = d3.scale.linear()
+    .range([height, 0]);
 
-g.append("svg:line")
-.attr("x1", x(0))
-.attr("y1", -1 * y(0))
-.attr("x2", x(0))
-.attr("y2", -1 * y(d3.max(data)))
-g.selectAll(".xLabel")
-    .data(x.ticks(5))
-    .enter().append("svg:text")
-    .attr("class", "xLabel")
-    .text(String)
-    .attr("x", function(d) { return x(d) })
-    .attr("y", 0)
-    .attr("text-anchor", "middle")
- 
-g.selectAll(".yLabel")
-    .data(y.ticks(4))
-    .enter().append("svg:text")
-    .attr("class", "yLabel")
-    .text(String)
-    .attr("x", 0)
-    .attr("y", function(d) { return -1 * y(d) })
-    .attr("text-anchor", "right")
-    .attr("dy", 4)
-    
-    g.selectAll(".xTicks")
-    .data(x.ticks(5))
-    .enter().append("svg:line")
-    .attr("class", "xTicks")
-    .attr("x1", function(d) { return x(d); })
-    .attr("y1", -1 * y(0))
-    .attr("x2", function(d) { return x(d); })
-    .attr("y2", -1 * y(-0.3))
- 
-g.selectAll(".yTicks")
-    .data(y.ticks(4))
-    .enter().append("svg:line")
-    .attr("class", "yTicks")
-    .attr("y1", function(d) { return -1 * y(d); })
-    .attr("x1", x(-0.3))
-    .attr("y2", function(d) { return -1 * y(d); })
-    .attr("x2", x(0))
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var area = d3.svg.area()
+    .x(function(d) { return x(d.date); })
+    .y0(height)
+    .y1(function(d) { return y(d.close); });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.tsv("<%=request.getContextPath()%>/resources/data/data.tsv", function(error, data) {
+  data.forEach(function(d) {
+    d.date = parseDate(d.date);
+    d.close = +d.close;
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+  svg.append("path")
+      .datum(data)
+      .attr("class", "area")
+      .attr("d", area);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Price ($)");
+});
+
 </script>
-</body>
-</html>
