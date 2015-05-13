@@ -146,7 +146,7 @@ public class HomeController {
 		final String formattedDate = dateFormat.format(new Date());
 		model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("averageValuesList", listOfAvgValues);*/
-		model.addAttribute("path", absoluteDiskPath);
+		model.addAttribute("path", envVar);
 		return "test";
 	}
 
