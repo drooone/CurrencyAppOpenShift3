@@ -39,15 +39,17 @@ public class TsvFile {
 
 		System.out.println("");
 		try {
-			fileWriter = new FileWriter("data.tsv");
+			fileWriter = new FileWriter("C:\\Users\\dombrowskip\\git\\currencyappopenshift3\\src\\main\\webapp\\resources\\data\\data.tsv");
+										 
 		} catch (IOException e) {
+			e.printStackTrace();
 			logger.info("File not created");
 		}
 		final BufferedWriter bufferedWrite = new BufferedWriter(fileWriter);
 		try {
-		bufferedWrite.write("publicationDate");
+		bufferedWrite.write("date");
 		bufferedWrite.write("\t");
-		bufferedWrite.write("avgCurValue");
+		bufferedWrite.write("close");
 		bufferedWrite.write("\t");
 		bufferedWrite.write("\n");
 		} catch (IOException e) {

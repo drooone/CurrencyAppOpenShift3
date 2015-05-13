@@ -19,7 +19,7 @@ body {
 
 </style>
 <body>
-
+<p class="tg">The time on the server is ${path}.</p>
 <script src="http://d3js.org/d3.v3.js"></script>
 <script>
 
@@ -27,7 +27,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
+var parseDate = d3.time.format("%d/%m/%Y").parse;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -81,7 +81,7 @@ d3.tsv("<%=request.getContextPath()%>/resources/data/data.tsv", function(error, 
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Price ($)");
+      .text(" Avg Price");
 });
 
 </script>
