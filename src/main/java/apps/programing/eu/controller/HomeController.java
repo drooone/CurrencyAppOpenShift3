@@ -131,7 +131,7 @@ public class HomeController {
 		System.out.println("DDD:" + path);
 		ServletContext servletContext = request.getSession().getServletContext();
 		String relativeWebPath = "resource/data/data.tsv";
-		String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+		String absoluteDiskPath = servletContext.getRealPath("/");
 		System.out.println("Sciecha:" + absoluteDiskPath);
 		/*for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
 			final Currency cur = (Currency) iterator.next();
