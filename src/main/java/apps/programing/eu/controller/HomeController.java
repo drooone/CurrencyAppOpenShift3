@@ -132,7 +132,10 @@ public class HomeController {
 		ServletContext servletContext = request.getSession().getServletContext();
 		String relativeWebPath = "resource/data/data.tsv";
 		String absoluteDiskPath = servletContext.getRealPath("/");
-		System.out.println("Sciecha:" + absoluteDiskPath);
+	 	
+
+		String envVar = System.getenv("OPENSHIFT_ENV_VAR");
+		System.out.println("Sciecha:" + envVar);
 		/*for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
 			final Currency cur = (Currency) iterator.next();
 			listOfAvgValues.append(cur.getAverageExchangeRate());
