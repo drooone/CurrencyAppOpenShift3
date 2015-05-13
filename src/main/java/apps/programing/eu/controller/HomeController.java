@@ -129,7 +129,7 @@ public class HomeController {
 		//final StringBuilder listOfAvgValues = new StringBuilder("");
 		final List<Currency> curExchRateList = this.currencyService.listCurrencyAverageValues("AUD", "01/01/2007", "01/04/2015");
 		TsvFile tsv = new TsvFile(curExchRateList);
-		//tsv.createTSVFile();
+		tsv.createTSVFile();
 		ServletContext servletContext = request.getSession().getServletContext();
 		String relativeWebPath = "resource/data/data.tsv";
 		String absoluteDiskPath = servletContext.getRealPath("/");

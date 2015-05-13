@@ -54,7 +54,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("<%=System.getenv("OPENSHIFT_DATA_DIR")%>data.tsv", function(error, data) {
+d3.tsv("<%=request.getContextPath()%>/resources/data/data.tsv", function(error, data) {
   data.forEach(function(d) {
     d.date = parseDate(d.date);
     d.close = +d.close;
