@@ -1,6 +1,9 @@
 package apps.programing.eu.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -127,15 +130,12 @@ public class HomeController {
 		final List<Currency> curExchRateList = this.currencyService.listCurrencyAverageValues("AUD", "01/01/2007", "01/04/2015");
 		TsvFile tsv = new TsvFile(curExchRateList);
 		//tsv.createTSVFile();
-		String path = request.getSession().getServletContext().getRealPath("/");
-		System.out.println("DDD:" + path);
 		ServletContext servletContext = request.getSession().getServletContext();
 		String relativeWebPath = "resource/data/data.tsv";
 		String absoluteDiskPath = servletContext.getRealPath("/");
-	 	
+		
+		String path="/webapp/resources/data/data.tsv";
 
-		String envVar = System.getenv("OPENSHIFT_ENV_VAR");
-		System.out.println("Sciecha:" + envVar);
 		/*for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
 			final Currency cur = (Currency) iterator.next();
 			listOfAvgValues.append(cur.getAverageExchangeRate());
@@ -146,7 +146,7 @@ public class HomeController {
 		final String formattedDate = dateFormat.format(new Date());
 		model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("averageValuesList", listOfAvgValues);*/
-		model.addAttribute("path", envVar);
+		//model.addAttribute("path", envVar);
 		return "test";
 	}
 
