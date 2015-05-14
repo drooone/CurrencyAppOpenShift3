@@ -17,7 +17,7 @@ body {
 
 
 </style>
-<body>
+<body background="<%=request.getContextPath()%>/resources/pics/bg.jpg">
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<script>
 		var margin = {

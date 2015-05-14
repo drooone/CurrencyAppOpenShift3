@@ -51,14 +51,14 @@
 }
 </style>
 </head>
-<body>
+<body background="<%=request.getContextPath()%>/resources/pics/bg.jpg">
 
 	<br>
 	<h1>Currency project</h1>
 	<p class="tg">The time on the server is ${serverTime}.</p>
 	<p>
 		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze strony NBP <a
-			href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a> <br> <strong>Zaaaaa </strong>
+			href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a> <br> 
 	<ul>
 		<li>
 		<li>

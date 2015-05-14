@@ -75,7 +75,7 @@ select {
 </style>
 
 </head>
-<body>
+<body background="<%=request.getContextPath()%>/resources/pics/bg.jpg">
 	
 	<c:set var="path" value="${currencyCode}" />
 	<%-- 	<a href="currency?currencyCode=${path}&dateFrom=01/01/2009&dateTo=01/04/2015">link</a> --%>
