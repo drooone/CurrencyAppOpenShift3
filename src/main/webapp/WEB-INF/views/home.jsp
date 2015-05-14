@@ -79,10 +79,11 @@
 			</tr>
 			<%
 				Object list = request.getAttribute("listCurrency");
+				Object[] obj=null;
 					Iterator<Object> itr = ((List) list).iterator();
 					while (itr.hasNext()) {
 
-						Object[] obj = (Object[]) itr.next();
+						obj = (Object[]) itr.next();
 						/* Currency curr = Currency.getInstance((String) obj[2]); */
 			%>
 			<tr>
@@ -100,7 +101,7 @@
 			%>
 
 		</table>
-		<a href="test">Link</a>
+		<a href="test?currencyCode=<%=obj[2]%>">Link</a>
 	</c:if>
 </body>
 </html>

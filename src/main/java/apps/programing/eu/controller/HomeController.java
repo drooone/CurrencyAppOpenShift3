@@ -1,9 +1,5 @@
 package apps.programing.eu.controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -11,13 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import apps.programing.eu.model.Currency;
 import apps.programing.eu.service.CurrencyService;
 import apps.programing.eu.util.Chart;
-import apps.programing.eu.util.TsvFile;
 
 /**
  * Handles requests for the application home page.
@@ -124,29 +118,36 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "test", method = RequestMethod.GET)
-	public String listCurrency(final Locale locale, final Model model,HttpServletRequest request) {
+	public String listCurrency(final Locale locale, final Model model, @RequestParam final String currencyCode) {
 		
-		//final StringBuilder listOfAvgValues = new StringBuilder("");
-		final List<Currency> curExchRateList = this.currencyService.listCurrencyAverageValues("AUD", "01/01/2007", "01/04/2015");
-		TsvFile tsv = new TsvFile(curExchRateList);
-		tsv.createTSVFile();
-		ServletContext servletContext = request.getSession().getServletContext();
-		String relativeWebPath = "resource/data/data.tsv";
-		String absoluteDiskPath = servletContext.getRealPath("/");
+		logger.info("Currency:" + currencyService);
+		final StringBuilder listOfDataValues = new StringBuilder("");
+		listOfDataValues.append('[');
+		final List<Currency> curExchRateList = this.currencyService.listCurrencyAverageValues(currencyCode, "01/01/2007", "01/04/2015");
+		//TsvFile tsv = new TsvFile(curExchRateList);
+		//tsv.createTSVFile();
 		
-		String path="/webapp/resources/data/data.tsv";
+		
+		
 
-		/*for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
+		for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
 			final Currency cur = (Currency) iterator.next();
-			listOfAvgValues.append(cur.getAverageExchangeRate());
-			listOfAvgValues.append(',');
+			
+			final String dateInStringFormat = DateFormatUtils.format(cur.getPublicationDate(), "dd/MM/yyyy");
+			listOfDataValues.append('[');
+			listOfDataValues.append('"');
+			listOfDataValues.append(dateInStringFormat);
+			listOfDataValues.append('"');
+			listOfDataValues.append(',');
+			listOfDataValues.append(cur.getAverageExchangeRate());
+			listOfDataValues.append(']');
+			listOfDataValues.append(',');
+			
 		}
-		final DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+			listOfDataValues.append(']');
 
-		final String formattedDate = dateFormat.format(new Date());
-		model.addAttribute("serverTime", formattedDate);
-		model.addAttribute("averageValuesList", listOfAvgValues);*/
-		//model.addAttribute("path", envVar);
+		model.addAttribute("listOfDataValues", listOfDataValues);
+		logger.info(listOfDataValues);
 		return "test";
 	}
 

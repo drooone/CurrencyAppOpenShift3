@@ -92,6 +92,6 @@ select {
 			<input type="submit" value="Refresh chart" class="button">
 		</div>
 	</form:form>
-<a href="test">Link to D3 chart</a>
+<a href="test?currencyCode=${currencyCode}">Link to D3 chart</a>
 </body>
 </html>
