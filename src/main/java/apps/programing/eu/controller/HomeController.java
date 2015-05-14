@@ -133,10 +133,10 @@ public class HomeController {
 		for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
 			final Currency cur = (Currency) iterator.next();
 			
-			final String dateInStringFormat = DateFormatUtils.format(cur.getPublicationDate(), "dd/MM/yyyy");
+			final String dateStringFormat = DateFormatUtils.format(cur.getPublicationDate(), "dd/MM/yyyy");
 			listOfDataValues.append('[');
 			listOfDataValues.append('"');
-			listOfDataValues.append(dateInStringFormat);
+			listOfDataValues.append(dateStringFormat);
 			listOfDataValues.append('"');
 			listOfDataValues.append(',');
 			listOfDataValues.append(cur.getAverageExchangeRate());
