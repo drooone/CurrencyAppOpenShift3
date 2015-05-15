@@ -27,9 +27,9 @@
 
 	<context:component-scan base-package="apps.programing.eu" />
 	<!-- Hekko DB connection config info -->
-	<context:property-placeholder location="classpath:systemHekko.properties" />
+	<!-- <context:property-placeholder location="classpath:systemHekko.properties" /> -->
 	<!-- OpenShift DB connection config info -->
-	<!-- <context:property-placeholder location="classpath:systemOpenShift.properties" /> -->
+	<context:property-placeholder location="classpath:systemOpenShift.properties" />
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
