@@ -25,6 +25,10 @@ body {
      text-align: center;
      
   }
+  
+  .graph-svg-component {
+    background-color: AliceBlue;
+}
 
 </style>
 </head>
@@ -61,9 +65,8 @@ body {
 
 		var svg = d3.select("body").append("svg").attr("width",
 				width + margin.left + margin.right).attr("height",
-				height + margin.top + margin.bottom).append("g").attr(
-				"transform",
-				"translate(" + margin.left + "," + margin.top + ")");
+				height + margin.top + margin.bottom).attr("class", "graph-svg-component").
+				append("g").attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
 		var data = ${listOfDataValues};
 
