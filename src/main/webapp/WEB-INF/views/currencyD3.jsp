@@ -13,7 +13,7 @@ body {
 
 .axis path, .axis line {
 	fill: none;
-	stroke: #000;
+	stroke: #fff;
 	shape-rendering: crispEdges;
 }
 
@@ -27,7 +27,7 @@ body {
   }
   
   .graph-svg-component {
-    background-color: AliceBlue;
+    background-color: #ddd;
 }
 
 </style>
@@ -44,7 +44,7 @@ body {
 			right : 20,
 			bottom : 30,
 			left : 50
-		}, width = 960 - margin.left - margin.right, height = 500 - margin.top
+		}, width = 1100 - margin.left - margin.right, height = 500 - margin.top
 				- margin.bottom;
 
 		var parseDate = d3.time.format("%d/%m/%Y").parse;
@@ -53,9 +53,11 @@ body {
 
 		var y = d3.scale.linear().range([ height, 0 ]);
 
-		var xAxis = d3.svg.axis().scale(x).orient("bottom");
+		var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(10)
+	    .tickSize(-height);
 
-		var yAxis = d3.svg.axis().scale(y).orient("left");
+		var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10)
+	    .tickSize(-width);
 
 		var area = d3.svg.area().x(function(d) {
 			return x(d.x);

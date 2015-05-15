@@ -61,23 +61,26 @@ ul { display:table; margin:0 auto;}
 	<p class="tg">The time on the server is ${serverTime}.</p>
 	<br>
 	<h1 align="CENTER">Currencies exchange rate project</h1>
+	
 	<p align="CENTER">
+	
 		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze
 		strony NBP <a href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a>
 		<br>
 		Dane na stronie NBP zawarte są w plikach XML każdy plik reprezentuje notowanie z konkretnego dnia tygodnia.
 		Do przygotowania danych użyto technologii:
+		
 	</p>		
 	
 	<ul>
-		<li> Java 1.7 </li>
-		<li> Java SAX Paraser </li>
-		<li> Hibernate ver 4 </li>
-		<li> Bazy MySQL ver 5.5</li>
-		<li> Spring MVC framework </li>
-		<li> Apache Tomcat 6</li>
-		<li> Projekt działa na serwerze <a href="https://www.openshift.com/">OpenShift</a></li>
-		<li> JScript D3.js, jQuery </li>
+		<li><b> Java 1.7 </b></li>
+		<li><b> Java SAX Paraser </b></li>
+		<li><b> Hibernate ver 4</b> </li>
+		<li><b> Bazy MySQL ver 5.5</b></li>
+		<li><b> Spring MVC framework</b> </li>
+		<li><b> Apache Tomcat 6</b></li>
+		<li><b> Projekt działa na serwerze <a href="https://www.openshift.com/">OpenShift</a></b></li>
+		<li><b> JScript D3.js, jQuery </b></li>
 	</ul>
 	
 	<h2 align="CENTER">A list of currencies</h2>

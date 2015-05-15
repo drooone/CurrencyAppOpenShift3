@@ -43,7 +43,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(final Locale locale, final Model model) {
-		logger.info("Welcome home! The client locale is {}.");
+		
 		model.addAttribute("currency", new Currency());
 		model.addAttribute("listCurrency", currencyService.listCurrency());
 
@@ -117,7 +117,6 @@ public class HomeController {
 	public String listCurrency(final Locale locale, final Model model, @RequestParam final String currencyCode,
 			@RequestParam(required=false) String dateFrom, @RequestParam(required=false) String dateTo) {
 		
-		logger.info("Currency:" + dateFrom);
 		final StringBuilder listOfDataValues = new StringBuilder("");
 		listOfDataValues.append('[');
 		
@@ -149,7 +148,6 @@ public class HomeController {
 			listOfDataValues.append(']');
 
 		model.addAttribute("listOfDataValues", listOfDataValues);
-		logger.info(listOfDataValues);
 		return "currencyD3";
 	}
 
