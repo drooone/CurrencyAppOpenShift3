@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import apps.programing.eu.model.Currency;
 import apps.programing.eu.service.CurrencyService;
 import apps.programing.eu.util.Chart;
@@ -117,17 +113,23 @@ public class HomeController {
 		return "currency";
 	}
 
-	@RequestMapping(value = "test", method = RequestMethod.GET)
-	public String listCurrency(final Locale locale, final Model model, @RequestParam final String currencyCode) {
+	@RequestMapping(value = "currencyD3", method = RequestMethod.GET)
+	public String listCurrency(final Locale locale, final Model model, @RequestParam final String currencyCode,
+			@RequestParam(required=false) String dateFrom, @RequestParam(required=false) String dateTo) {
 		
-		logger.info("Currency:" + currencyService);
+		logger.info("Currency:" + dateFrom);
 		final StringBuilder listOfDataValues = new StringBuilder("");
 		listOfDataValues.append('[');
-		final List<Currency> curExchRateList = this.currencyService.listCurrencyAverageValues(currencyCode, "01/01/2007", "01/04/2015");
-		//TsvFile tsv = new TsvFile(curExchRateList);
-		//tsv.createTSVFile();
 		
-		
+		if("".equals(dateFrom)){
+			
+			dateFrom = "01/01/2007";
+		}
+		if("".equals(dateTo)){
+			
+			dateTo = "01/04/2015";
+		}
+		final List<Currency> curExchRateList = this.currencyService.listCurrencyAverageValues(currencyCode, dateFrom, dateTo);
 		
 
 		for (final Iterator<Currency> iterator = curExchRateList.iterator(); iterator.hasNext();) {
@@ -148,7 +150,7 @@ public class HomeController {
 
 		model.addAttribute("listOfDataValues", listOfDataValues);
 		logger.info(listOfDataValues);
-		return "test";
+		return "currencyD3";
 	}
 
 }

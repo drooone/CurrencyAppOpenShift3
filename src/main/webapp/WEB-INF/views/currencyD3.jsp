@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+
 <style>
 body {
 	font: 10px sans-serif;
+	text-align: center;
 }
 
 .axis path, .axis line {
@@ -15,10 +19,18 @@ body {
 	fill: steelblue;
 }
 
+.holder{
+     text-align: center;
+     
+  }
 
 </style>
 <body background="<%=request.getContextPath()%>/resources/pics/bg.jpg">
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 	<script src="http://d3js.org/d3.v3.js"></script>
+
+
 	<script>
 		var margin = {
 			top : 20,
@@ -50,7 +62,6 @@ body {
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 
-		/*  var data = [[1,1],[2,3],[3,2]]; */
 		var data = ${listOfDataValues};
 
 		var dataCallback = function(d) {
@@ -75,3 +86,14 @@ body {
 				.attr("transform", "rotate(-90)").attr("y", 6).attr("dy",
 						".71em").style("text-anchor", "end").text("Avg price"); 
 	</script>
+
+      
+	
+	<div class="holder">
+	<font size="2">
+      <b>
+      Rys. 1 Wykres przygotowany za pomocą biblioteki <a href="http://d3js.org/">D3.js</a>
+      </b>
+	</font>
+</div>
+	</body>

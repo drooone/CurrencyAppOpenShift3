@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -7,7 +8,7 @@
 <html lang="us">
 <head>
 <meta charset="utf-8">
-<title>Chart</title>
+<title>Charts4J</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/external/jquery/jquery.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery-ui.js"></script>
@@ -72,28 +73,49 @@ body {
 select {
 	width: 200px;
 }
-
+.holder{
+     text-align: center;
+  }
 </style>
 
 </head>
 <body background="<%=request.getContextPath()%>/resources/pics/bg.jpg">
-	
+<br><br><br><br><br>
 	<c:set var="path" value="${currencyCode}" />
-	<%-- 	<a href="currency?currencyCode=${path}&dateFrom=01/01/2009&dateTo=01/04/2015">link</a> --%>
-	<img alt="Chart" src=${chartUrl } />
+	<div class="holder" style="float:left">
+      <div class="newsfeed_photo">
+      
+          <img alt="Small" class="photo_thumb_frame" src=${chartUrl } border="3" vspace="5"/>
+      </div>
+      <div class="newsfeed_date">
+      <b>
+      Rys. 1 Wykres przygotowany za pomocą <a href="https://code.google.com/p/charts4j/">Charts4J</a>
+      </b>
+      </div>
+	</div>
 	
+	<h2 align="center">Zakres dat</h2>
+
 	<form:form id="myform" method="post" action="currency2">
 		<p>
-			&nbsp; &nbsp; Code: <input name="currencyCode" value="${currencyCode}"> Date from: 
-			<input name="dateFrom" id="dateFrom" value="${dateFrom}"/> &nbsp;
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Date to: 
-			<input name="dateTo" id="dateTo" value="${dateTo}"/>
+			&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<b>Code:</b> <input name="currencyCode" value="${currencyCode}" readonly>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+			<b>Date from:</b> <input name="dateFrom" id="dateFrom" value="${dateFrom}" /> 
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+			<b>Date to:</b> <input name="dateTo" id="dateTo" value="${dateTo}" />
 		</p>
-		<div>
-			<input type="submit" value="Refresh chart" class="button">
+		<div align="center">
+			<input type="submit" value="Refresh chart" >
 		</div>
 	</form:form>
-	
-<a href="test?currencyCode=${currencyCode}">Link to D3 chart</a>
+	<br>
+	<br>
+	<br>
+	<p align="center">
+	<font size="3">
+	<a href="currencyD3?currencyCode=${currencyCode}&dateFrom=${dateFrom}&dateTo=${dateTo}">Alternatywna wersja wykresy z użyciem JavaScript i biblioteki D3.js</a>
+	</font>
+	</p>
 </body>
 </html>

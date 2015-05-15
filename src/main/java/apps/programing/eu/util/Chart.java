@@ -31,14 +31,14 @@ public class Chart {
 
 	public String createLineChart() {
 
-		final Line line = Plots.newLine(DataUtil.scaleWithinRange(0, 10, chartData), Color.newColor("CA3D05"), "Chart " + currencyCode);
+		final Line line = Plots.newLine(DataUtil.scaleWithinRange(0, 10, chartData), Color.BLUE, "Chart " + currencyCode);
 		line.setLineStyle(LineStyle.MEDIUM_LINE);
 		final List<Integer> xAxisX = axisXelements();
 		final LineChart chart = GCharts.newLineChart(line);
 
 		chart.setGrid(12, 10, 3, 2);
 		chart.setSize(600, 500);
-		chart.setTitle("Currency chart", Color.CORAL, 14);
+		chart.setTitle("Currency chart", Color.BLUE, 14);
 
 		final AxisLabels xAxis = AxisLabelsFactory.newNumericAxisLabels(xAxisX);
 																		

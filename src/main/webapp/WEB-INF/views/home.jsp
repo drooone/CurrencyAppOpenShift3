@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -17,6 +18,7 @@
 	border-spacing: 0;
 	border-color: #ccc;
 	position: center;
+	margin: 0px auto;
 }
 
 .tg td {
@@ -30,6 +32,8 @@
 	border-color: #ccc;
 	color: #333;
 	background-color: #fff;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .tg th {
@@ -49,22 +53,34 @@
 .tg .tg-4eph {
 	background-color: #f9f9f9
 }
+
+ul { display:table; margin:0 auto;}
 </style>
 </head>
 <body background="<%=request.getContextPath()%>/resources/pics/bg.jpg">
-
-	<br>
-	<h1>Currency project</h1>
 	<p class="tg">The time on the server is ${serverTime}.</p>
-	<p>
-		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze strony NBP <a
-			href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a> <br> 
+	<br>
+	<h1 align="CENTER">Currencies exchange rate project</h1>
+	<p align="CENTER">
+		Tabela prezentuje kursy walut z ostatniego dnia miesiąca pobrane ze
+		strony NBP <a href="http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html">(link)</a>
+		<br>
+		Dane na stronie NBP zawarte są w plikach XML każdy plik reprezentuje notowanie z konkretnego dnia tygodnia.
+		Do przygotowania danych użyto technologii:
+	</p>		
+	
 	<ul>
-		<li>
-		<li>
+		<li> Java 1.7 </li>
+		<li> Java SAX Paraser </li>
+		<li> Hibernate ver 4 </li>
+		<li> Bazy MySQL ver 5.5</li>
+		<li> Spring MVC framework </li>
+		<li> Apache Tomcat 6</li>
+		<li> Projekt działa na serwerze <a href="https://www.openshift.com/">OpenShift</a></li>
+		<li> JScript D3.js, jQuery </li>
 	</ul>
-
-	<h2 align="CENTER">Currency List</h2>
+	
+	<h2 align="CENTER">A list of currencies</h2>
 
 	<c:if test="${!empty listCurrency}">
 		<table class="tg">
@@ -79,7 +95,7 @@
 			</tr>
 			<%
 				Object list = request.getAttribute("listCurrency");
-				Object[] obj=null;
+					Object[] obj = null;
 					Iterator<Object> itr = ((List) list).iterator();
 					while (itr.hasNext()) {
 
@@ -95,13 +111,13 @@
 				<td><%=obj[3]%></td>
 				<td><a href="currency?currencyCode=<%=obj[2]%>"><%=obj[2]%></a></td>
 			</tr>
-			
+
 			<%
 				}
 			%>
 
 		</table>
-		<a href="test?currencyCode=<%=obj[2]%>">Link</a>
+		<a href="currencyD3?currencyCode=<%=obj[2]%>&">Link</a>
 	</c:if>
 </body>
 </html>
