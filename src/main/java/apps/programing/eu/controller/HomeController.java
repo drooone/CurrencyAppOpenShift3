@@ -21,6 +21,7 @@ import apps.programing.eu.util.Chart;
 
 /**
  * Handles requests for the application home page.
+ * TODo change names
  */
 @Controller
 public class HomeController {
