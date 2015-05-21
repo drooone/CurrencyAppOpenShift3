@@ -166,6 +166,7 @@ public class HomeController {
 			listOfDataValues.append(']');
 
 		model.addAttribute("listOfDataValues", listOfDataValues);
+		
 		return "currencyD3";
 	}
 

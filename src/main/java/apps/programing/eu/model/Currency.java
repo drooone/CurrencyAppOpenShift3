@@ -16,27 +16,27 @@ public class Currency {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idCurrency;
+	private Long id;
 	@Temporal(value = TemporalType.DATE)
 	private Date publicationDate;
-	private String currencyCode;
+	private String code;
 	private Double averageExchangeRate;
-	private String currencyFullName;
+	private String fullName;
 
 	public String getCurrencyFullName() {
-		return currencyFullName;
+		return fullName;
 	}
 
 	public void setCurrencyFullName(final String currencyFullName) {
-		this.currencyFullName = currencyFullName;
+		this.fullName = currencyFullName;
 	}
 
-	public Long getIdCurrency() {
-		return idCurrency;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdCurrency(final Long idCurrency) {
-		this.idCurrency = idCurrency;
+	public void setId(final Long idCurrency) {
+		this.id = idCurrency;
 	}
 
 	public Date getPublicationDate() {
@@ -48,11 +48,11 @@ public class Currency {
 	}
 
 	public String getCurrencyCode() {
-		return currencyCode;
+		return code;
 	}
 
 	public void setCurrencyCode(final String currencyCode) {
-		this.currencyCode = currencyCode;
+		this.code = currencyCode;
 	}
 
 	public Double getAverageExchangeRate() {
@@ -65,10 +65,10 @@ public class Currency {
 
 	@Override
 	public String toString() {
-		return "Currency [idCurrency=" + idCurrency + ", publicationDate="
-				+ publicationDate + ", currencyCode=" + currencyCode
+		return "Currency [idCurrency=" + id + ", publicationDate="
+				+ publicationDate + ", currencyCode=" + code
 				+ ", averageExchangeRate=" + averageExchangeRate
-				+ ", currencyFullName=" + currencyFullName + "]";
+				+ ", currencyFullName=" + fullName + "]";
 	}
 
 }
