@@ -39,7 +39,6 @@ public class TsvFile {
 
 		System.out.println("");
 		try {
-			//fileWriter = new FileWriter("C:\\Users\\dombrowskip\\git\\currencyappopenshift3\\src\\main\\webapp\\resources\\data\\data.tsv");
 			fileWriter = new FileWriter("CurrencyAppOpenShift3/src/main/webapp/resource/data/data.tsv");
 										 
 		} catch (IOException e) {

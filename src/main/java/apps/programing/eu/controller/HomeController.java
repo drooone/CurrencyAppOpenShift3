@@ -81,7 +81,15 @@ public class HomeController {
 
 		return "currency";
 	}
-
+	/**
+	 * modifies chart to specific date range
+	 * 
+	 * @param model
+	 * @param currencyCode - currency code
+	 * @param dateFrom - date from range
+	 * @param dateTo - date to range
+	 * @return currency.jsp page
+	 */
 	@RequestMapping(value = "/currency2", method = RequestMethod.POST)
 	public String drawChartWithDates(final Model model, @RequestParam final String currencyCode,
 									 @RequestParam(required=false) String dateFrom, @RequestParam(required=false) String dateTo
@@ -112,7 +120,17 @@ public class HomeController {
 
 		return "currency";
 	}
-
+	
+	/**
+	 * Returns alternative chart made with D#.js library
+	 * 
+	 * @param locale
+	 * @param model
+	 * @param currencyCode - currency Code
+	 * @param dateFrom - date From range
+	 * @param dateTo - date to range
+	 * @return currencyD3.jsp
+	 */
 	@RequestMapping(value = "currencyD3", method = RequestMethod.GET)
 	public String listCurrency(final Locale locale, final Model model, @RequestParam final String currencyCode,
 			@RequestParam(required=false) String dateFrom, @RequestParam(required=false) String dateTo) {
